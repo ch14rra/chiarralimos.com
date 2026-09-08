@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chiarra Limos — Biomedical Engineering</title>
+<title>Chiarra Tajonera Limos — Biomedical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -56,8 +56,12 @@
     border-bottom:1px solid rgba(255,255,255,0.08);
   }
   nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:"Fraunces", serif; font-size:1.15rem; color:var(--paper); letter-spacing:0.01em;}
-  .brand svg{width:22px; height:22px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:"Fraunces", serif; font-size:1.05rem; color:var(--paper); letter-spacing:0.01em; white-space:nowrap;}
+  .brand svg{width:22px; height:22px; flex:none;}
+  .brand-name{font-weight:500;}
+  @media (max-width:420px){
+    .brand{font-size:0.88rem;}
+  }
   .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
   .navlinks a{
     color:rgba(251,246,236,0.82); text-decoration:none; font-size:0.92rem; font-weight:500;
@@ -136,6 +140,11 @@
   /* ---------- SECTION SHELL ---------- */
   section{padding:96px 0;}
   .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head-wide{max-width:none;}
+  .nowrap-heading{white-space:nowrap;}
+  @media (max-width:560px){
+    .nowrap-heading{white-space:normal; font-size:1.5rem;}
+  }
   .section-tag{color:var(--lily-dark); font-weight:600; font-size:0.9rem; margin-bottom:10px;}
   .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem);}
   .section-head p{color:var(--ink-soft); margin-top:14px; font-size:1.02rem;}
@@ -178,8 +187,16 @@
 
   /* ---------- PROJECTS (petal cards) ---------- */
   #projects{background:var(--paper);}
+  .project-group{margin-bottom:56px;}
+  .project-group:last-child{margin-bottom:0;}
+  .project-group-title{
+    font-size:1rem; font-weight:600; color:var(--lily-dark);
+    text-transform:none; margin-bottom:22px;
+    padding-bottom:10px; border-bottom:1px solid rgba(24,40,35,0.1);
+  }
   .petal-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:26px;}
-  @media (max-width:900px){.petal-grid{grid-template-columns:1fr;}}
+  .petal-grid-single{grid-template-columns:minmax(0, 420px);}
+  @media (max-width:900px){.petal-grid{grid-template-columns:1fr;} .petal-grid-single{grid-template-columns:1fr;}}
   .petal-card{
     background:var(--paper); border:1px solid rgba(24,40,35,0.1);
     border-radius:24px 24px 24px 4px;
@@ -206,6 +223,19 @@
     display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
     background:rgba(211,162,78,0.15); color:#8a6a1f; padding:5px 12px; border-radius:999px;
     font-size:0.78rem; font-weight:600;
+  }
+  .petal-card-featured{
+    border:1px solid rgba(211,162,78,0.5);
+    background:linear-gradient(180deg, rgba(211,162,78,0.07), var(--paper) 40%);
+    box-shadow:0 14px 30px rgba(211,162,78,0.14);
+  }
+  .petal-card-featured:hover{
+    border-color:var(--gold);
+    box-shadow:0 24px 44px rgba(211,162,78,0.22);
+  }
+  .petal-card-featured h3{font-size:1.28rem;}
+  .petal-badge-featured{
+    background:var(--gold); color:var(--paper);
   }
 
   /* ---------- EDUCATION ---------- */
@@ -259,7 +289,7 @@
   <div class="wrap">
     <div class="brand">
       <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-3-2.5-3-6-3-6s3.5 0 5 1.8c1.2 1.4 1 4.2 1 4.2S13.6 22 12 21z" fill="currentColor" opacity="0.6"/><path d="M12 21c3-2.5 3-6 3-6s-3.5 0-5 1.8c-1.2 1.4-1 4.2-1 4.2S10.4 22 12 21z" fill="currentColor"/></svg>
-      Chiarra Limos
+      <span class="brand-name">Chiarra Tajonera Limos</span>
     </div>
     <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
     <ul class="navlinks" id="navLinks">
@@ -281,7 +311,7 @@
     <div>
       <div class="hero-eyebrow">Biomedical Engineering, UC Irvine</div>
       <h1>Growing ideas at the edge of <em>cells</em> and <em>circuits</em>.</h1>
-      <p class="lede">I'm Chiarra — a biomedical engineering student who moves between the wet lab and the machine shop, from cancer cell biology to hand orthoses to rovers built for disaster response.</p>
+      <p class="lede">I design medical devices and study cell biology, driven by one goal: sharpening diagnostic accuracy for chronic health conditions such as cancer and heart disease.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#projects">See my projects</a>
         <a class="btn btn-ghost" href="#contact">Get in touch</a>
@@ -311,13 +341,12 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-tag">About</div>
-      <h2>A student who likes getting her hands into both petri dishes and prototypes.</h2>
+      <h2>Bridging research, design, and the manufacture of medical technology.</h2>
     </div>
     <div class="about-grid">
       <div>
-        <p>I'm pursuing a B.S. in Biomedical Engineering at the University of California, Irvine, where I split my time between benchwork and build-space. In the Kessenbrock Lab at UCI Health's Chao Family Comprehensive Cancer Center, I work with single-cell RNA sequencing data and mouse colony genetics to understand how mutant tumor-suppressor proteins shape epithelial cells.</p>
-        <p>Outside the lab, I lead and build: directing a six-person team through the design of a low-cost hand orthosis for stroke rehabilitation, and engineering the suspension system for an award-winning fire-extinguishing rover. Earlier work took me from a stem-cell lab on the Central Coast to the streets of Oxnard, where I collected and analyzed survey data on youth economic mobility for the City Council.</p>
-        <p>What ties it together is a comfort with ambiguity — I like projects that start as an open question, whether that's "why do these cells behave this way" or "how do we get this rover over rough terrain."</p>
+        <p>I'm a Biomedical Engineering student at UC Irvine researching tumor-suppressor biology in the Kessenbrock Lab at UCI Health's Chao Family Comprehensive Cancer Center, using single-cell RNA sequencing to study how mutant proteins reshape epithelial cells.</p>
+        <p>Alongside that research, I design and build: leading a team through a low-cost hand orthosis for stroke rehabilitation, and engineering the suspension of an award-winning rescue rover. That combination — lab-based discovery paired with hands-on device design — is what draws me toward manufacturing medical devices and pharmaceuticals, where research has to hold up under real-world production.</p>
       </div>
       <div class="pad-card">
         <h3>At a glance</h3>
@@ -346,28 +375,16 @@
         <div class="stem-role">Assistant Undergraduate Researcher</div>
         <div class="stem-org">Kessenbrock Lab — UCI Health Chao Family Comprehensive Cancer Center</div>
         <div class="stem-meta">Jan. 2026 – Present · Irvine, CA</div>
-        <ul>
-          <li>Expanded backcrossing mouse colonies by three generations and used RStudio to turn single-cell RNA sequencing data into volcano plots and UMAPs, informing weekly literature review on mutant tumor-suppressor proteins in epithelial cells.</li>
-          <li>Built and maintain a centralized Excel tracking system for genotyping data and breeding records across 80+ mice, keeping experimental planning and colony management on schedule.</li>
-        </ul>
       </div>
       <div class="stem-item">
         <div class="stem-role">Undergraduate Intern</div>
         <div class="stem-org">Central Coast Biotech Center</div>
         <div class="stem-meta">July 2023 – Oct. 2025 · Oxnard, CA</div>
-        <ul>
-          <li>Boosted differentiation of 30-year-old frozen iPS cells by 70% through cell culturing and preparation of culture assays.</li>
-          <li>Led a multidisciplinary team through 10+ experimentation trials, streamlined four data collection protocols, and co-authored five research posters presented at regional conferences.</li>
-        </ul>
       </div>
       <div class="stem-item">
         <div class="stem-role">Student Surveyor</div>
         <div class="stem-org">UCLA Chicano Studies Research Center &amp; City of Oxnard</div>
         <div class="stem-meta">June 2023 – Aug. 2023 · Oxnard, CA</div>
-        <ul>
-          <li>Collected 3,000+ in-person surveys from Oxnard residents aged 18–34 to gauge upward mobility of the youth population following the COVID-19 pandemic.</li>
-          <li>Organized data across six socioeconomic dimensions in STATA, co-producing a published mixed-method report presented to the Oxnard City Council on disparities in education, food security, and economic standing.</li>
-        </ul>
       </div>
     </div>
   </div>
@@ -375,50 +392,97 @@
 
 <section id="projects">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head section-head-wide">
       <div class="section-tag">Projects</div>
-      <h2>Things I've designed, built, and led.</h2>
+      <h2 class="nowrap-heading">Work I've designed, built, and led.</h2>
     </div>
 
-    <div class="petal-grid">
-      <div class="petal-card">
-        <div class="petal-badge">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 21V13a6 6 0 0112 0v8"/><path d="M6 21h12"/><path d="M12 3v4"/></svg>
+    <div class="project-group">
+      <h3 class="project-group-title">Engineering</h3>
+      <div class="petal-grid">
+        <div class="petal-card petal-card-featured">
+          <div class="petal-badge petal-badge-featured">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2"/></svg>
+          </div>
+          <span class="award">🏆 Best Overall · Sponsor's Choice</span>
+          <h3>Fire-Extinguishing Rover</h3>
+          <div class="petal-role">Mobility Systems Specialist</div>
+          <div class="petal-meta">Jan. 2026 – May 2026 · 2026 FUSION Engineering Project</div>
+          <ul>
+            <li>Sketched and modeled a 6-wheel suspension system in SolidWorks, validating it with Finite Element Analysis to improve navigation through rough terrain by 80%.</li>
+            <li>Selected modular components, fabricated mounting platforms via CNC laser-cutting, and hand-integrated the suspension sub-assembly to the chassis.</li>
+          </ul>
         </div>
-        <h3>Exoskeleton Hand</h3>
-        <div class="petal-role">Project Manager · BME 60C</div>
-        <div class="petal-meta">April 2026 – June 2026</div>
-        <ul>
-          <li>Designed a low-cost hand orthosis to support muscle spasticity, 3D modeling and drafting parts for a tendon-driven transmission system while sourcing materials within a $300 budget.</li>
-          <li>Directed a team of six through weekly meetings, a Gantt chart, and task delegation, improving the device's range of motion by 38% for stroke patient rehabilitation.</li>
-        </ul>
-      </div>
 
-      <div class="petal-card">
-        <div class="petal-badge">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2"/></svg>
+        <div class="petal-card">
+          <div class="petal-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 21V13a6 6 0 0112 0v8"/><path d="M6 21h12"/><path d="M12 3v4"/></svg>
+          </div>
+          <h3>Exoskeleton Hand</h3>
+          <div class="petal-role">Project Manager · BME 60C</div>
+          <div class="petal-meta">April 2026 – June 2026</div>
+          <ul>
+            <li>Designed a low-cost hand orthosis to support muscle spasticity, 3D modeling and drafting parts for a tendon-driven transmission system while sourcing materials within a $300 budget.</li>
+            <li>Directed a team of six through weekly meetings, a Gantt chart, and task delegation, improving the device's range of motion by 38% for stroke patient rehabilitation.</li>
+          </ul>
         </div>
-        <span class="award">🏆 Best Overall · Sponsor's Choice</span>
-        <h3>Fire-Extinguishing Rover</h3>
-        <div class="petal-role">Mobility Systems Specialist</div>
-        <div class="petal-meta">Jan. 2026 – May 2026 · 2026 FUSION Engineering Project</div>
-        <ul>
-          <li>Sketched and modeled a 6-wheel suspension system in SolidWorks, validating it with Finite Element Analysis to improve navigation through rough terrain by 80%.</li>
-          <li>Selected modular components, fabricated mounting platforms via CNC laser-cutting, and hand-integrated the suspension sub-assembly to the chassis.</li>
-        </ul>
       </div>
+    </div>
 
-      <div class="petal-card">
-        <div class="petal-badge">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+    <div class="project-group">
+      <h3 class="project-group-title">Academia</h3>
+      <div class="petal-grid">
+        <div class="petal-card petal-card-featured">
+          <div class="petal-badge petal-badge-featured">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          </div>
+          <span class="award">First Author &amp; Project Lead</span>
+          <h3>Optimization of Signaling Pathways for Therapeutic Cardiac Cell Production</h3>
+          <div class="petal-meta">October 2025 · SCCUR Cal State Channel Islands</div>
+          <ul>
+            <li>Spearheaded five novel experimental treatment strategies, including Wnt signaling, to induce heart cell differentiation.</li>
+            <li>Selected from 800+ applicants to present at the 2025 Southern California Conference for Undergraduate Research.</li>
+          </ul>
         </div>
-        <h3>Signaling Pathways for Cardiac Cell Production</h3>
-        <div class="petal-role">First Author &amp; Project Lead</div>
-        <div class="petal-meta">October 2025 · SCCUR</div>
-        <ul>
-          <li>Spearheaded five novel experimental treatment strategies, including Wnt signaling, to induce heart cell differentiation.</li>
-          <li>Selected from 800+ applicants to present at the 2025 Southern California Conference for Undergraduate Research.</li>
-        </ul>
+
+        <div class="petal-card">
+          <div class="petal-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M4 8h16M6 8v11a2 2 0 002 2h8a2 2 0 002-2V8M10 12v5M14 12v5"/></svg>
+          </div>
+          <h3>Treatment of P19.CL6 with 5' Azacytidine and 1% DMSO Restores Pluripotency</h3>
+          <div class="petal-role">Student Researcher</div>
+          <div class="petal-meta">November 2023 · SCCUR Cal State Fullerton</div>
+          <ul>
+            <li>Treated P19.CL6 pluripotent stem cells with 5'-azacytidine and 1% DMSO to reverse DNA methylation and restore naive pluripotency across all three germ layers.</li>
+            <li>Cultured embryoid bodies through mesoderm-promoting differentiation and identified ectoderm, mesoderm, and endoderm markers via microscopy, observing pigmented epithelial, beating cardiac-like, and neuronal cells within three weeks.</li>
+          </ul>
+        </div>
+
+        <div class="petal-card">
+          <div class="petal-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          </div>
+          <h3>Nitrous Oxide Increases Beating of Pluripotent P19.CL6 Heart Cells</h3>
+          <div class="petal-role">Student Researcher</div>
+          <div class="petal-meta">July 2025 · SCCUR Cal State San Bernadino</div>
+          <ul>
+            <li>Tested a staged treatment sequence of 5'-azacytidine, DMSO, hypoxia, and nitrous oxide to restore pluripotency and boost the beating phenotype of P19.CL6 cardiac cells.</li>
+            <li>Found that longer nitrous oxide exposure and higher 5'-aza concentration correlated with stronger, more synchronized beating and network formation across treated plates.</li>
+          </ul>
+        </div>
+
+        <div class="petal-card">
+          <div class="petal-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+          </div>
+          <h3>Stepwise Treatments of 5' Azacytidine, DMSO, Gelatin/Collagen/Fibrin, Nitrous Oxide, and Hypoxia Improves Mouse P19.CL6 Heart Cells</h3>
+          <div class="petal-role">Student Researcher</div>
+          <div class="petal-meta">April 2025 · SCCUR Cal State San Bernadino</div>
+          <ul>
+            <li>Investigated the optimal order of 5'-aza, DMSO, gelatin/collagen/fibrin, nitrous oxide, and hypoxia treatments to maximize cardiac cell beating in P19.CL6 cells.</li>
+            <li>Found that a sequence starting with 5'-aza followed by 1% DMSO most effectively enhanced beating and tissue development over 17 weeks of observation.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -493,7 +557,6 @@
     <div class="contact-links">
       <a class="btn btn-primary" href="mailto:limos.ct1@gmail.com">Email me</a>
       <a class="btn btn-ghost" href="https://linkedin.com/in/chiarralimos14" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="tel:8058244092">(805) 824-4092</a>
     </div>
   </div>
 </section>
