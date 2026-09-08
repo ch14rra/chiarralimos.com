@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiarra Limos — Biomedical Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pond-deep:#0b3a3a;
+    --pond-mid:#124f4c;
+    --pond-glow:#1c6a63;
+    --lotus:#e78fae;
+    --lotus-soft:#f6d7e2;
+    --lily:#5d8a6f;
+    --lily-dark:#3c5f47;
+    --gold:#d3a24e;
+    --paper:#fbf6ec;
+    --paper-2:#f3ecd9;
+    --ink:#182823;
+    --ink-soft:#4a5c53;
+    --max:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Work Sans", sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:"Fraunces", serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(11,58,58,0.72);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:"Fraunces", serif; font-size:1.15rem; color:var(--paper); letter-spacing:0.01em;}
+  .brand svg{width:22px; height:22px;}
+  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .navlinks a{
+    color:rgba(251,246,236,0.82); text-decoration:none; font-size:0.92rem; font-weight:500;
+    padding:6px 2px; border-bottom:1px solid transparent; transition:border-color .2s, color .2s;
+  }
+  .navlinks a:hover{color:var(--paper); border-color:var(--lotus);}
+  .navtoggle{display:none; background:none; border:0; color:var(--paper); font-size:1.4rem; cursor:pointer;}
+
+  @media (max-width:760px){
+    .navlinks{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--pond-deep); flex-direction:column; gap:0;
+      max-height:0; overflow:hidden; transition:max-height .3s ease;
+    }
+    .navlinks.open{max-height:320px;}
+    .navlinks li{border-top:1px solid rgba(255,255,255,0.08);}
+    .navlinks a{display:block; padding:16px 28px;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:radial-gradient(ellipse at 70% 20%, var(--pond-glow), var(--pond-deep) 60%);
+    color:var(--paper);
+    overflow:hidden;
+    padding-top:64px;
+  }
+  .ripple{
+    position:absolute; border:1px solid rgba(251,246,236,0.14);
+    border-radius:50%;
+    left:50%; top:62%;
+    transform:translate(-50%,-50%);
+    animation:ripple-out 6s ease-out infinite;
+  }
+  .ripple.r2{animation-delay:2s;}
+  .ripple.r3{animation-delay:4s;}
+  @keyframes ripple-out{
+    0%{width:40px; height:40px; opacity:0.7;}
+    100%{width:900px; height:900px; opacity:0;}
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:center;
+    width:100%;
+  }
+  .hero-eyebrow{color:var(--lotus-soft); font-size:0.95rem; margin-bottom:14px; font-weight:500;}
+  .hero h1{font-size:clamp(2.6rem, 6vw, 4.4rem); line-height:1.04; letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic; color:var(--lotus);}
+  .hero p.lede{
+    margin-top:22px; max-width:46ch; color:rgba(251,246,236,0.86); font-size:1.08rem;
+  }
+  .hero-actions{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:999px; text-decoration:none;
+    font-weight:600; font-size:0.95rem; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--lotus); color:var(--pond-deep);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(231,143,174,0.35);}
+  .btn-ghost{border:1px solid rgba(251,246,236,0.4); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--paper); transform:translateY(-2px);}
+
+  .hero-art{position:relative; z-index:2; justify-self:center;}
+  .lotus-anim{width:min(320px, 80%);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .hero-art{justify-self:start; margin-top:20px; width:220px;}
+  }
+
+  .wave-divider{display:block; width:100%; margin-top:-2px;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-tag{color:var(--lily-dark); font-weight:600; font-size:0.9rem; margin-bottom:10px;}
+  .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem);}
+  .section-head p{color:var(--ink-soft); margin-top:14px; font-size:1.02rem;}
+
+  /* ---------- ABOUT ---------- */
+  #about{background:var(--paper);}
+  .about-grid{display:grid; grid-template-columns:1.3fr 0.9fr; gap:56px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); font-size:1.05rem; margin:0 0 18px;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .pad-card{
+    background:var(--paper-2); border-radius:20px; padding:28px;
+    border:1px solid rgba(24,40,35,0.06);
+  }
+  .pad-card h3{font-size:1.05rem; margin-bottom:14px; color:var(--lily-dark);}
+  .pad-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .pad-list li{display:flex; gap:10px; font-size:0.95rem; color:var(--ink-soft);}
+  .pad-list li svg{flex:none; width:16px; height:16px; margin-top:4px; color:var(--lotus);}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- EXPERIENCE (stem timeline) ---------- */
+  #experience{background:var(--pond-deep); color:var(--paper); position:relative;}
+  #experience .section-tag{color:var(--lotus-soft);}
+  #experience .section-head p{color:rgba(251,246,236,0.75);}
+  .stem{position:relative; padding-left:34px;}
+  .stem::before{
+    content:""; position:absolute; left:6px; top:8px; bottom:8px; width:2px;
+    background:linear-gradient(var(--lily), transparent 96%);
+  }
+  .stem-item{position:relative; padding-bottom:52px;}
+  .stem-item:last-child{padding-bottom:0;}
+  .stem-item::before{
+    content:""; position:absolute; left:-34px; top:6px; width:14px; height:14px;
+    border-radius:50%; background:var(--lotus); box-shadow:0 0 0 4px rgba(231,143,174,0.18);
+  }
+  .stem-role{font-family:"Fraunces", serif; font-size:1.3rem; margin-bottom:4px;}
+  .stem-org{color:var(--lotus-soft); font-weight:500; font-size:0.98rem;}
+  .stem-meta{color:rgba(251,246,236,0.55); font-size:0.88rem; margin-top:4px; margin-bottom:16px;}
+  .stem-item ul{margin:0; padding-left:20px; color:rgba(251,246,236,0.85); font-size:0.98rem;}
+  .stem-item li{margin-bottom:8px;}
+
+  /* ---------- PROJECTS (petal cards) ---------- */
+  #projects{background:var(--paper);}
+  .petal-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:26px;}
+  @media (max-width:900px){.petal-grid{grid-template-columns:1fr;}}
+  .petal-card{
+    background:var(--paper); border:1px solid rgba(24,40,35,0.1);
+    border-radius:24px 24px 24px 4px;
+    padding:30px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .petal-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(11,58,58,0.12);
+    border-color:var(--lotus);
+  }
+  .petal-badge{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--paper-2); display:flex; align-items:center; justify-content:center;
+    color:var(--lily-dark);
+  }
+  .petal-card h3{font-size:1.2rem;}
+  .petal-role{color:var(--ink-soft); font-size:0.88rem; font-weight:500;}
+  .petal-meta{color:#8a978f; font-size:0.82rem;}
+  .petal-card ul{margin:6px 0 0; padding-left:18px; font-size:0.94rem; color:var(--ink-soft);}
+  .petal-card li{margin-bottom:8px;}
+  .award{
+    display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
+    background:rgba(211,162,78,0.15); color:#8a6a1f; padding:5px 12px; border-radius:999px;
+    font-size:0.78rem; font-weight:600;
+  }
+
+  /* ---------- EDUCATION ---------- */
+  #education{background:var(--paper-2);}
+  .edu-card{
+    background:var(--paper); border-radius:24px; padding:44px;
+    display:grid; grid-template-columns:auto 1fr; gap:30px; align-items:start;
+    border:1px solid rgba(24,40,35,0.07);
+  }
+  .edu-icon{width:56px; height:56px; color:var(--lotus);}
+  .edu-card h3{font-size:1.4rem;}
+  .edu-sub{color:var(--lily-dark); font-weight:500; margin-top:4px;}
+  .edu-meta{color:var(--ink-soft); font-size:0.92rem; margin-top:4px;}
+  .edu-detail{margin-top:18px; color:var(--ink-soft); font-size:0.96rem;}
+  .edu-detail strong{color:var(--ink);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .chip{background:var(--paper-2); border:1px solid rgba(24,40,35,0.08); padding:6px 14px; border-radius:999px; font-size:0.85rem; color:var(--ink-soft);}
+  @media (max-width:640px){.edu-card{grid-template-columns:1fr;}}
+
+  /* ---------- SKILLS ---------- */
+  #skills{background:var(--paper);}
+  .skill-cols{display:grid; grid-template-columns:repeat(3, 1fr); gap:34px;}
+  @media (max-width:800px){.skill-cols{grid-template-columns:1fr;}}
+  .skill-col h3{font-size:1rem; color:var(--lily-dark); margin-bottom:16px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    background:var(--paper-2); padding:8px 16px; border-radius:999px;
+    font-size:0.88rem; color:var(--ink); border:1px solid rgba(24,40,35,0.07);
+  }
+  .cert-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .cert-list li{font-size:0.93rem; color:var(--ink-soft); padding-left:18px; position:relative;}
+  .cert-list li::before{content:"•"; position:absolute; left:0; color:var(--lotus);}
+
+  /* ---------- CONTACT ---------- */
+  #contact{
+    background:var(--pond-deep); color:var(--paper); text-align:center; position:relative;
+  }
+  #contact h2{color:var(--paper); font-size:clamp(2rem,4vw,2.8rem);}
+  #contact p{color:rgba(251,246,236,0.78); max-width:52ch; margin:16px auto 34px;}
+  .contact-links{display:flex; justify-content:center; gap:18px; flex-wrap:wrap;}
+  footer{
+    background:var(--pond-deep); color:rgba(251,246,236,0.5);
+    text-align:center; padding:22px 0; font-size:0.85rem;
+    border-top:1px solid rgba(251,246,236,0.08);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-3-2.5-3-6-3-6s3.5 0 5 1.8c1.2 1.4 1 4.2 1 4.2S13.6 22 12 21z" fill="currentColor" opacity="0.6"/><path d="M12 21c3-2.5 3-6 3-6s-3.5 0-5 1.8c-1.2 1.4-1 4.2-1 4.2S10.4 22 12 21z" fill="currentColor"/></svg>
+      Chiarra Limos
+    </div>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="ripple r1"></div>
+  <div class="ripple r2"></div>
+  <div class="ripple r3"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow">Biomedical Engineering, UC Irvine</div>
+      <h1>Growing ideas at the edge of <em>cells</em> and <em>circuits</em>.</h1>
+      <p class="lede">I'm Chiarra — a biomedical engineering student who moves between the wet lab and the machine shop, from cancer cell biology to hand orthoses to rovers built for disaster response.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See my projects</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="lotus-anim" viewBox="0 0 300 300" fill="none">
+        <ellipse cx="150" cy="255" rx="120" ry="14" fill="#0e4644"/>
+        <path d="M150 260C120 230 60 220 40 190C70 210 120 210 150 235C180 210 230 210 260 190C240 220 180 230 150 260Z" fill="#3c5f47"/>
+        <g>
+          <path d="M150 235C150 235 108 175 108 130C108 100 128 82 150 82C172 82 192 100 192 130C192 175 150 235 150 235Z" fill="#f6d7e2"/>
+          <path d="M150 235C150 235 92 200 78 160C68 132 82 108 106 102C130 96 150 116 156 144C164 178 150 235 150 235Z" fill="#e78fae" opacity="0.92"/>
+          <path d="M150 235C150 235 208 200 222 160C232 132 218 108 194 102C170 96 150 116 144 144C136 178 150 235 150 235Z" fill="#e78fae" opacity="0.92"/>
+          <path d="M150 235C150 235 78 195 55 168C34 144 40 116 62 104C86 92 112 106 126 132C142 162 150 235 150 235Z" fill="#f0a9c3" opacity="0.85"/>
+          <path d="M150 235C150 235 222 195 245 168C266 144 260 116 238 104C214 92 188 106 174 132C158 162 150 235 150 235Z" fill="#f0a9c3" opacity="0.85"/>
+          <circle cx="150" cy="160" r="16" fill="#d3a24e"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <svg class="wave-divider" viewBox="0 0 1440 90" preserveAspectRatio="none" style="height:70px;">
+    <path d="M0,64 C240,10 480,90 720,54 C960,18 1200,84 1440,40 L1440,100 L0,100 Z" fill="#fbf6ec"/>
+  </svg>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">About</div>
+      <h2>A student who likes getting her hands into both petri dishes and prototypes.</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm pursuing a B.S. in Biomedical Engineering at the University of California, Irvine, where I split my time between benchwork and build-space. In the Kessenbrock Lab at UCI Health's Chao Family Comprehensive Cancer Center, I work with single-cell RNA sequencing data and mouse colony genetics to understand how mutant tumor-suppressor proteins shape epithelial cells.</p>
+        <p>Outside the lab, I lead and build: directing a six-person team through the design of a low-cost hand orthosis for stroke rehabilitation, and engineering the suspension system for an award-winning fire-extinguishing rover. Earlier work took me from a stem-cell lab on the Central Coast to the streets of Oxnard, where I collected and analyzed survey data on youth economic mobility for the City Council.</p>
+        <p>What ties it together is a comfort with ambiguity — I like projects that start as an open question, whether that's "why do these cells behave this way" or "how do we get this rover over rough terrain."</p>
+      </div>
+      <div class="pad-card">
+        <h3>At a glance</h3>
+        <ul class="pad-list">
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Irvine, CA</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>B.S. Biomedical Engineering, UC Irvine — March 2028</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Distinguished Scholarship Recipient</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Biomedical Engineering Society &middot; Society of Women Engineers</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Fluent in Tagalog and English</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Experience</div>
+      <h2>Where the work has taken root.</h2>
+      <p>From cancer biology to community surveying, each role has added a new layer to how I think about problems.</p>
+    </div>
+
+    <div class="stem">
+      <div class="stem-item">
+        <div class="stem-role">Assistant Undergraduate Researcher</div>
+        <div class="stem-org">Kessenbrock Lab — UCI Health Chao Family Comprehensive Cancer Center</div>
+        <div class="stem-meta">Jan. 2026 – Present · Irvine, CA</div>
+        <ul>
+          <li>Expanded backcrossing mouse colonies by three generations and used RStudio to turn single-cell RNA sequencing data into volcano plots and UMAPs, informing weekly literature review on mutant tumor-suppressor proteins in epithelial cells.</li>
+          <li>Built and maintain a centralized Excel tracking system for genotyping data and breeding records across 80+ mice, keeping experimental planning and colony management on schedule.</li>
+        </ul>
+      </div>
+      <div class="stem-item">
+        <div class="stem-role">Undergraduate Intern</div>
+        <div class="stem-org">Central Coast Biotech Center</div>
+        <div class="stem-meta">July 2023 – Oct. 2025 · Oxnard, CA</div>
+        <ul>
+          <li>Boosted differentiation of 30-year-old frozen iPS cells by 70% through cell culturing and preparation of culture assays.</li>
+          <li>Led a multidisciplinary team through 10+ experimentation trials, streamlined four data collection protocols, and co-authored five research posters presented at regional conferences.</li>
+        </ul>
+      </div>
+      <div class="stem-item">
+        <div class="stem-role">Student Surveyor</div>
+        <div class="stem-org">UCLA Chicano Studies Research Center &amp; City of Oxnard</div>
+        <div class="stem-meta">June 2023 – Aug. 2023 · Oxnard, CA</div>
+        <ul>
+          <li>Collected 3,000+ in-person surveys from Oxnard residents aged 18–34 to gauge upward mobility of the youth population following the COVID-19 pandemic.</li>
+          <li>Organized data across six socioeconomic dimensions in STATA, co-producing a published mixed-method report presented to the Oxnard City Council on disparities in education, food security, and economic standing.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Projects</div>
+      <h2>Things I've designed, built, and led.</h2>
+    </div>
+
+    <div class="petal-grid">
+      <div class="petal-card">
+        <div class="petal-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 21V13a6 6 0 0112 0v8"/><path d="M6 21h12"/><path d="M12 3v4"/></svg>
+        </div>
+        <h3>Exoskeleton Hand</h3>
+        <div class="petal-role">Project Manager · BME 60C</div>
+        <div class="petal-meta">April 2026 – June 2026</div>
+        <ul>
+          <li>Designed a low-cost hand orthosis to support muscle spasticity, 3D modeling and drafting parts for a tendon-driven transmission system while sourcing materials within a $300 budget.</li>
+          <li>Directed a team of six through weekly meetings, a Gantt chart, and task delegation, improving the device's range of motion by 38% for stroke patient rehabilitation.</li>
+        </ul>
+      </div>
+
+      <div class="petal-card">
+        <div class="petal-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2"/></svg>
+        </div>
+        <span class="award">🏆 Best Overall · Sponsor's Choice</span>
+        <h3>Fire-Extinguishing Rover</h3>
+        <div class="petal-role">Mobility Systems Specialist</div>
+        <div class="petal-meta">Jan. 2026 – May 2026 · 2026 FUSION Engineering Project</div>
+        <ul>
+          <li>Sketched and modeled a 6-wheel suspension system in SolidWorks, validating it with Finite Element Analysis to improve navigation through rough terrain by 80%.</li>
+          <li>Selected modular components, fabricated mounting platforms via CNC laser-cutting, and hand-integrated the suspension sub-assembly to the chassis.</li>
+        </ul>
+      </div>
+
+      <div class="petal-card">
+        <div class="petal-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        </div>
+        <h3>Signaling Pathways for Cardiac Cell Production</h3>
+        <div class="petal-role">First Author &amp; Project Lead</div>
+        <div class="petal-meta">October 2025 · SCCUR</div>
+        <ul>
+          <li>Spearheaded five novel experimental treatment strategies, including Wnt signaling, to induce heart cell differentiation.</li>
+          <li>Selected from 800+ applicants to present at the 2025 Southern California Conference for Undergraduate Research.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Education</div>
+      <h2>Roots.</h2>
+    </div>
+    <div class="edu-card">
+      <svg class="edu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg>
+      <div>
+        <h3>University of California, Irvine</h3>
+        <div class="edu-sub">B.S. Biomedical Engineering</div>
+        <div class="edu-meta">Irvine, CA · Expected March 2028</div>
+        <div class="edu-detail"><strong>Distinguished Scholarship Recipient.</strong> Member of the Biomedical Engineering Society and Society of Women Engineers.</div>
+        <div class="edu-detail"><strong>Relevant coursework:</strong> Cell and Molecular Engineering, Intro to Biostatistics, Engineering Analysis/Design: Computer-Aided Design.</div>
+        <div class="chip-row">
+          <span class="chip">Cell &amp; Molecular Engineering</span>
+          <span class="chip">Intro to Biostatistics</span>
+          <span class="chip">Computer-Aided Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Skills &amp; Certifications</div>
+      <h2>Tools of the trade.</h2>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h3>Software</h3>
+        <div class="tag-row">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">C</span>
+          <span class="tag">R (scRNA-seq)</span>
+          <span class="tag">Google Workspace</span>
+          <span class="tag">Microsoft Office 365</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Certifications</h3>
+        <ul class="cert-list">
+          <li>MATLAB Onramp</li>
+          <li>CITI Program: Human Subjects Research</li>
+          <li>CITI Program: Working with Mice in Research</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Languages</h3>
+        <div class="tag-row">
+          <span class="tag">Tagalog — native</span>
+          <span class="tag">English — native</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Let's talk science, engineering, or both.</h2>
+    <p>Open to research collaborations, internships, and conversations about biomedical design. I usually reply within a day.</p>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:limos.ct1@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/chiarralimos14" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="tel:8058244092">(805) 824-4092</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Chiarra Tajonera Limos · Irvine, CA</div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
