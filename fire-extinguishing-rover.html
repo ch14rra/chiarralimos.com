@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoverCooked: Fire-Extinguishing Rover — Chiarra Limos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pond-deep:#0b3a3a; --pond-glow:#1c6a63;
+    --lotus:#e78fae; --lotus-soft:#f6d7e2;
+    --lily-dark:#3c5f47; --gold:#d3a24e;
+    --paper:#fbf6ec; --paper-2:#f3ecd9;
+    --ink:#182823; --ink-soft:#4a5c53;
+    --max:880px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:"Work Sans", sans-serif; line-height:1.65;}
+  h1,h2,h3{font-family:"Fraunces", serif; font-weight:500; margin:0; color:var(--ink);}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+
+  header{
+    background:radial-gradient(ellipse at 70% 20%, var(--pond-glow), var(--pond-deep) 70%);
+    color:var(--paper); padding:60px 0 54px;
+  }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; color:rgba(251,246,236,0.8);
+    text-decoration:none; font-size:0.9rem; font-weight:500; margin-bottom:28px;
+  }
+  .back-link:hover{color:var(--paper);}
+  .eyebrow{color:var(--lotus-soft); font-size:0.9rem; font-weight:500; margin-bottom:12px;}
+  header h1{font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.15;}
+  .byline{margin-top:18px; color:rgba(251,246,236,0.85); font-size:0.98rem;}
+  .affil{margin-top:8px; color:rgba(251,246,236,0.6); font-size:0.85rem;}
+  .event-chip{
+    display:inline-flex; align-items:center; gap:6px; margin-top:20px; background:rgba(211,162,78,0.2); color:var(--gold);
+    padding:6px 16px; border-radius:999px; font-size:0.85rem; font-weight:600;
+  }
+
+  main{padding:56px 0 90px;}
+  section{margin-bottom:44px;}
+  section h2{font-size:1.3rem; color:var(--lily-dark); margin-bottom:16px;}
+  .card{
+    background:var(--paper-2); border-radius:18px; padding:28px 30px;
+    border:1px solid rgba(24,40,35,0.06); color:var(--ink-soft); font-size:1rem;
+  }
+  .card p{margin:0 0 14px;}
+  .card p:last-child{margin-bottom:0;}
+  .spec-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:6px;}
+  @media (max-width:600px){.spec-grid{grid-template-columns:1fr;}}
+  .spec{background:var(--paper); border-radius:12px; padding:14px 18px; font-size:0.92rem;}
+  .spec strong{display:block; color:var(--lily-dark); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.03em; margin-bottom:4px;}
+  .poster-frame{
+    border-radius:18px; overflow:hidden; border:1px solid rgba(24,40,35,0.08);
+    box-shadow:0 20px 44px rgba(11,58,58,0.14); margin-bottom:44px;
+  }
+  .poster-frame img{display:block; width:100%; height:auto;}
+  .team{font-size:0.95rem; color:var(--ink-soft);}
+  footer{background:var(--pond-deep); color:rgba(251,246,236,0.55); text-align:center; padding:22px 0; font-size:0.85rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="index.html">&larr; Back to portfolio</a>
+    <div class="eyebrow">FUSION Engineering Project</div>
+    <h1>RoverCooked: Fire-Extinguishing Rover</h1>
+    <div class="byline">Role: Mobility Systems Specialist</div>
+    <div class="affil">UCI Samueli School of Engineering, Department of Mechanical and Aerospace Engineering</div>
+    <span class="event-chip">🏆 Best Overall · Sponsor's Choice — 2026 FUSION Engineering Project</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="poster-frame">
+      <img src="assets/rover-poster.jpg" alt="RoverCooked Fire-Extinguishing Rover project poster">
+    </div>
+
+    <section>
+      <h2>Objectives</h2>
+      <div class="card">
+        <p>The team set out to build a remote-controlled rover capable of driving over rough terrain, aiming at a target, and toggling a pump system to spray water accurately at mock fires. Inspired by NASA's Mars rovers, the team designed a rocker-bogie suspension system to navigate obstacles and climb uphill terrain, paired with a first-person camera view for precise aiming.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>System Overview</h2>
+      <div class="card">
+        <p>The chassis was built primarily from PVC pipe and connectors along with 3D-printed PETG parts and wood, chosen for ease of manufacturing, reproducibility, and low cost. The finished rover measured roughly 17.3 by 17 by 15 inches and weighed about 12.5 pounds without water, with a total build cost of just under $660 across mechanical and hardware components.</p>
+        <div class="spec-grid">
+          <div class="spec"><strong>Dimensions</strong>17.3" &times; 17" &times; 15"</div>
+          <div class="spec"><strong>Weight (no water)</strong>12.52 lbs</div>
+          <div class="spec"><strong>Mechanical cost</strong>$277.62</div>
+          <div class="spec"><strong>Hardware cost</strong>$378.05</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Mechanical Design</h2>
+      <div class="card">
+        <p>My primary contribution was designing and validating the rover's mobility system: a four-motor, six-wheel rocker-bogie suspension modeled after NASA's Mars rover platform. The design lets each side of the chassis pivot independently, so all six wheels stay in contact with uneven ground &mdash; distributing load evenly, resisting tipping, and maintaining consistent ground clearance without relying on a spring suspension.</p>
+        <p>Early concepts explored a PVC-pipe rocker-bogie frame with a triangular linkage geometry, prioritizing independent motors on each wheel for precise steering and the ability to climb over obstacles and inclined terrain. From there, the design moved through several fabrication iterations: an initial four-motor, six-wheel PVC and PETG frame with the rocker and bogie arms joined by custom plates, followed by refined motor and wheel mounts with M3 mounting holes, added structural support, and a bolt-secured wheel mount that replaced an earlier 3D-printed extrusion for a more reliable fit.</p>
+        <p>Wheel selection was also part of this process &mdash; comparing a smooth polypropylene caster wheel against a treaded rubber RC-truck wheel and tire set with a hex adapter to couple directly to the motor shaft, ultimately choosing the option that paired better traction with a simpler motor connection.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <div class="card">
+        <p>The finished rover successfully combined mechanical, electrical, and controls subsystems into a single working platform, earning Best Overall and Sponsor's Choice honors at the 2026 FUSION Engineering Project showcase. The rocker-bogie suspension performed as intended, improving navigation through rough terrain by roughly 80% over earlier fixed-frame designs.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>Chiarra Limos &middot; FUSION Engineering Project, UC Irvine</footer>
+
+</body>
+</html>
