@@ -56,11 +56,11 @@
     border-bottom:1px solid rgba(255,255,255,0.08);
   }
   nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:"Fraunces", serif; font-size:1.05rem; color:var(--paper); letter-spacing:0.01em; white-space:nowrap;}
-  .brand svg{width:22px; height:22px; flex:none;}
+  .nav-wrap{max-width:none; padding:0 20px;}
+  .brand{display:flex; align-items:center; gap:12px; font-family:"Fraunces", serif; font-size:1.6rem; font-weight:500; color:var(--paper); letter-spacing:-0.01em; white-space:nowrap;}
   .brand-name{font-weight:500;}
   @media (max-width:420px){
-    .brand{font-size:0.88rem;}
+    .brand{font-size:1.15rem;}
   }
   .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
   .navlinks a{
@@ -151,10 +151,31 @@
 
   /* ---------- ABOUT ---------- */
   #about{background:var(--paper);}
-  .about-grid{display:grid; grid-template-columns:1.3fr 0.9fr; gap:56px; align-items:start;}
-  .about-grid p{color:var(--ink-soft); font-size:1.05rem; margin:0 0 18px;}
-  .about-grid p:last-child{margin-bottom:0;}
+  .about-layout{
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    grid-template-areas:
+      "intro photo"
+      "text  card";
+    column-gap:56px;
+    row-gap:16px;
+    align-items:start;
+  }
+  .about-intro{grid-area:intro;}
+  .about-intro h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem);}
+  .about-text{grid-area:text;}
+  .about-text p{color:var(--ink-soft); font-size:1.02rem; line-height:1.9; margin:0;}
+  .about-photo{
+    grid-area:photo;
+    justify-self:center; align-self:end;
+    width:auto; max-width:240px; height:220px;
+    margin-bottom:14px;
+    object-fit:cover; object-position:center 22%;
+    border-radius:16px; border:1px solid rgba(24,40,35,0.06);
+    box-shadow:0 12px 26px rgba(11,58,58,0.12);
+  }
   .pad-card{
+    grid-area:card;
     background:var(--paper-2); border-radius:20px; padding:28px;
     border:1px solid rgba(24,40,35,0.06);
   }
@@ -162,7 +183,17 @@
   .pad-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
   .pad-list li{display:flex; gap:10px; font-size:0.95rem; color:var(--ink-soft);}
   .pad-list li svg{flex:none; width:16px; height:16px; margin-top:4px; color:var(--lotus);}
-  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  @media (max-width:860px){
+    .about-layout{
+      grid-template-columns:1fr;
+      grid-template-areas:
+        "intro"
+        "photo"
+        "text"
+        "card";
+    }
+    .about-photo{justify-self:center; max-width:260px; height:240px; margin-bottom:10px;}
+  }
 
   /* ---------- EXPERIENCE (stem timeline) ---------- */
   #experience{background:var(--pond-deep); color:var(--paper); position:relative;}
@@ -218,6 +249,14 @@
   .petal-role{color:var(--ink-soft); font-size:0.88rem; font-weight:500;}
   .petal-meta{color:#8a978f; font-size:0.82rem;}
   .petal-card ul{margin:6px 0 0; padding-left:18px; font-size:0.94rem; color:var(--ink-soft);}
+  .card-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+    color:var(--lily-dark); font-weight:600; font-size:0.9rem; text-decoration:none;
+    border-bottom:1px solid transparent; transition:border-color .2s, color .2s; align-self:flex-start;
+  }
+  .card-link:hover{color:var(--lotus); border-color:var(--lotus);}
+  .petal-card-featured .card-link{color:#8a6a1f;}
+  .petal-card-featured .card-link:hover{color:var(--gold); border-color:var(--gold);}
   .petal-card li{margin-bottom:8px;}
   .award{
     display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
@@ -286,9 +325,8 @@
 <body>
 
 <nav>
-  <div class="wrap">
+  <div class="wrap nav-wrap">
     <div class="brand">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-3-2.5-3-6-3-6s3.5 0 5 1.8c1.2 1.4 1 4.2 1 4.2S13.6 22 12 21z" fill="currentColor" opacity="0.6"/><path d="M12 21c3-2.5 3-6 3-6s-3.5 0-5 1.8c-1.2 1.4-1 4.2-1 4.2S10.4 22 12 21z" fill="currentColor"/></svg>
       <span class="brand-name">Chiarra Tajonera Limos</span>
     </div>
     <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
@@ -339,22 +377,22 @@
 
 <section id="about">
   <div class="wrap">
-    <div class="section-head">
-      <div class="section-tag">About</div>
-      <h2>Bridging research, design, and the manufacture of medical technology.</h2>
-    </div>
-    <div class="about-grid">
-      <div>
-        <p>I'm a Biomedical Engineering student at UC Irvine researching tumor-suppressor biology in the Kessenbrock Lab at UCI Health's Chao Family Comprehensive Cancer Center, using single-cell RNA sequencing to study how mutant proteins reshape epithelial cells.</p>
-        <p>Alongside that research, I design and build: leading a team through a low-cost hand orthosis for stroke rehabilitation, and engineering the suspension of an award-winning rescue rover. That combination — lab-based discovery paired with hands-on device design — is what draws me toward manufacturing medical devices and pharmaceuticals, where research has to hold up under real-world production.</p>
+    <div class="about-layout">
+      <div class="about-intro">
+        <div class="section-tag">About</div>
+        <h2>Bridging research, design, and the manufacture of medical technology.</h2>
+      </div>
+      <img class="about-photo" src="assets/chiarra-headshot.jpg" alt="Chiarra Tajonera Limos">
+      <div class="about-text">
+        <p>I'm a Biomedical Engineering student at UC Irvine, drawn to the space where lab-based discovery meets hands-on device design. My ambition is to help build the next generation of diagnostic equipment, tools precise enough to catch chronic disease earlier than what's possible today.</p>
       </div>
       <div class="pad-card">
         <h3>At a glance</h3>
         <ul class="pad-list">
           <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Irvine, CA</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>B.S. Biomedical Engineering, UC Irvine — March 2028</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>B.S. Biomedical Engineering, UC Irvine, June 2028</li>
           <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Distinguished Scholarship Recipient</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Biomedical Engineering Society &middot; Society of Women Engineers</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>'26–27 FUSION Engineering Project Director</li>
           <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Fluent in Tagalog and English</li>
         </ul>
       </div>
@@ -382,7 +420,7 @@
         <div class="stem-meta">July 2023 – Oct. 2025 · Oxnard, CA</div>
       </div>
       <div class="stem-item">
-        <div class="stem-role">Student Surveyor</div>
+        <div class="stem-role">Research Analyst Intern</div>
         <div class="stem-org">UCLA Chicano Studies Research Center &amp; City of Oxnard</div>
         <div class="stem-meta">June 2023 – Aug. 2023 · Oxnard, CA</div>
       </div>
@@ -412,6 +450,7 @@
             <li>Sketched and modeled a 6-wheel suspension system in SolidWorks, validating it with Finite Element Analysis to improve navigation through rough terrain by 80%.</li>
             <li>Selected modular components, fabricated mounting platforms via CNC laser-cutting, and hand-integrated the suspension sub-assembly to the chassis.</li>
           </ul>
+          <a class="card-link" href="fire-extinguishing-rover.html" target="_blank" rel="noopener">View project poster &rarr;</a>
         </div>
 
         <div class="petal-card">
@@ -443,24 +482,12 @@
             <li>Spearheaded five novel experimental treatment strategies, including Wnt signaling, to induce heart cell differentiation.</li>
             <li>Selected from 800+ applicants to present at the 2025 Southern California Conference for Undergraduate Research.</li>
           </ul>
+          <a class="card-link" href="signaling-pathways.html" target="_blank" rel="noopener">View project poster &rarr;</a>
         </div>
 
         <div class="petal-card">
           <div class="petal-badge">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M4 8h16M6 8v11a2 2 0 002 2h8a2 2 0 002-2V8M10 12v5M14 12v5"/></svg>
-          </div>
-          <h3>Treatment of P19.CL6 with 5' Azacytidine and 1% DMSO Restores Pluripotency</h3>
-          <div class="petal-role">Student Researcher</div>
-          <div class="petal-meta">November 2023 · SCCUR Cal State Fullerton</div>
-          <ul>
-            <li>Treated P19.CL6 pluripotent stem cells with 5'-azacytidine and 1% DMSO to reverse DNA methylation and restore naive pluripotency across all three germ layers.</li>
-            <li>Cultured embryoid bodies through mesoderm-promoting differentiation and identified ectoderm, mesoderm, and endoderm markers via microscopy, observing pigmented epithelial, beating cardiac-like, and neuronal cells within three weeks.</li>
-          </ul>
-        </div>
-
-        <div class="petal-card">
-          <div class="petal-badge">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
           </div>
           <h3>Nitrous Oxide Increases Beating of Pluripotent P19.CL6 Heart Cells</h3>
           <div class="petal-role">Student Researcher</div>
@@ -483,6 +510,19 @@
             <li>Found that a sequence starting with 5'-aza followed by 1% DMSO most effectively enhanced beating and tissue development over 17 weeks of observation.</li>
           </ul>
         </div>
+
+        <div class="petal-card">
+          <div class="petal-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M4 8h16M6 8v11a2 2 0 002 2h8a2 2 0 002-2V8M10 12v5M14 12v5"/></svg>
+          </div>
+          <h3>Treatment of P19.CL6 with 5' Azacytidine and 1% DMSO Restores Pluripotency</h3>
+          <div class="petal-role">Student Researcher</div>
+          <div class="petal-meta">November 2023 · SCCUR Cal State Fullerton</div>
+          <ul>
+            <li>Treated P19.CL6 pluripotent stem cells with 5'-azacytidine and 1% DMSO to reverse DNA methylation and restore naive pluripotency across all three germ layers.</li>
+            <li>Cultured embryoid bodies through mesoderm-promoting differentiation and identified ectoderm, mesoderm, and endoderm markers via microscopy, observing pigmented epithelial, beating cardiac-like, and neuronal cells within three weeks.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -492,20 +532,22 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-tag">Education</div>
-      <h2>Roots.</h2>
+      <h2>Planting the seeds of knowledge.</h2>
     </div>
     <div class="edu-card">
       <svg class="edu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg>
       <div>
         <h3>University of California, Irvine</h3>
         <div class="edu-sub">B.S. Biomedical Engineering</div>
-        <div class="edu-meta">Irvine, CA · Expected March 2028</div>
-        <div class="edu-detail"><strong>Distinguished Scholarship Recipient.</strong> Member of the Biomedical Engineering Society and Society of Women Engineers.</div>
-        <div class="edu-detail"><strong>Relevant coursework:</strong> Cell and Molecular Engineering, Intro to Biostatistics, Engineering Analysis/Design: Computer-Aided Design.</div>
+        <div class="edu-meta">Irvine, CA · Expected: June 2028</div>
+        <div class="edu-detail"><strong>Distinguished Scholarship Recipient</strong></div>
+        <div class="edu-detail" style="margin-top:6px;"><strong>Member</strong> of the Biomedical Engineering Society, Society of Women Engineers, and FilipinX Undergraduate Scientist-Engineers In An Organized Network</div>
+        <div class="edu-detail"><strong>Relevant Coursework:</strong></div>
         <div class="chip-row">
           <span class="chip">Cell &amp; Molecular Engineering</span>
           <span class="chip">Intro to Biostatistics</span>
           <span class="chip">Computer-Aided Design</span>
+          <span class="chip">Engineering Analysis/Design</span>
         </div>
       </div>
     </div>
@@ -525,7 +567,7 @@
           <span class="tag">SolidWorks</span>
           <span class="tag">MATLAB</span>
           <span class="tag">Arduino</span>
-          <span class="tag">C</span>
+          <span class="tag">C++</span>
           <span class="tag">R (scRNA-seq)</span>
           <span class="tag">Google Workspace</span>
           <span class="tag">Microsoft Office 365</span>
@@ -553,9 +595,9 @@
 <section id="contact">
   <div class="wrap">
     <h2>Let's talk science, engineering, or both.</h2>
-    <p>Open to research collaborations, internships, and conversations about biomedical design. I usually reply within a day.</p>
+    <p>Open to research collaborations, internships, and conversations about designing diagnostic and rehabilitative medical devices.</p>
     <div class="contact-links">
-      <a class="btn btn-primary" href="mailto:limos.ct1@gmail.com">Email me</a>
+      <a class="btn btn-primary" href="mailto:limos.ct1@gmail.com">Email</a>
       <a class="btn btn-ghost" href="https://linkedin.com/in/chiarralimos14" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
